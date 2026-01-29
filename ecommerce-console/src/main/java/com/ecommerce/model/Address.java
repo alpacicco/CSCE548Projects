@@ -16,9 +16,11 @@ public class Address {
     private Timestamp updatedAt;
 
     // Constructors
-    public Address() {}
+    public Address() {
+    }
 
-    public Address(Integer userId, String addressType, String streetAddress, String city, String state, String postalCode, String country) {
+    public Address(Integer userId, String addressType, String streetAddress, String city, String state,
+            String postalCode, String country) {
         this.userId = userId;
         this.addressType = addressType;
         this.streetAddress = streetAddress;

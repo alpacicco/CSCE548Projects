@@ -14,9 +14,11 @@ public class Payment {
     private Timestamp createdAt;
 
     // Constructors
-    public Payment() {}
+    public Payment() {
+    }
 
-    public Payment(Integer orderId, String paymentMethod, String transactionId, BigDecimal amount, String paymentStatus) {
+    public Payment(Integer orderId, String paymentMethod, String transactionId, BigDecimal amount,
+            String paymentStatus) {
         this.orderId = orderId;
         this.paymentMethod = paymentMethod;
         this.transactionId = transactionId;

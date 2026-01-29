@@ -13,7 +13,8 @@ public class OrderItem {
     private Timestamp createdAt;
 
     // Constructors
-    public OrderItem() {}
+    public OrderItem() {
+    }
 
     public OrderItem(Integer orderId, Integer productId, Integer quantity, BigDecimal unitPrice, BigDecimal subtotal) {
         this.orderId = orderId;

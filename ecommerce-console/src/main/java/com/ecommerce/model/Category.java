@@ -10,7 +10,8 @@ public class Category {
     private Timestamp updatedAt;
 
     // Constructors
-    public Category() {}
+    public Category() {
+    }
 
     public Category(String name, String description) {
         this.name = name;

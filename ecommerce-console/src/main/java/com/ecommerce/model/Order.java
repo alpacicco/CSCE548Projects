@@ -19,9 +19,11 @@ public class Order {
     private Timestamp updatedAt;
 
     // Constructors
-    public Order() {}
+    public Order() {
+    }
 
-    public Order(Integer userId, String orderNumber, BigDecimal totalAmount, Integer shippingAddressId, Integer billingAddressId) {
+    public Order(Integer userId, String orderNumber, BigDecimal totalAmount, Integer shippingAddressId,
+            Integer billingAddressId) {
         this.userId = userId;
         this.orderNumber = orderNumber;
         this.status = "PENDING";

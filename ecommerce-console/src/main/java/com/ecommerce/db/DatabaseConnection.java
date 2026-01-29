@@ -46,7 +46,7 @@ public class DatabaseConnection {
 
             // Load MySQL driver
             Class.forName("com.mysql.cj.jdbc.Driver");
-            
+
             initialized = true;
             System.out.println("Database configuration initialized successfully.");
         } catch (ClassNotFoundException e) {
@@ -62,6 +62,7 @@ public class DatabaseConnection {
 
     /**
      * Get a database connection
+     * 
      * @return Connection object
      * @throws SQLException if connection fails
      */
@@ -74,6 +75,7 @@ public class DatabaseConnection {
 
     /**
      * Test database connection
+     * 
      * @return true if connection successful
      */
     public static boolean testConnection() {
@@ -87,6 +89,7 @@ public class DatabaseConnection {
 
     /**
      * Close a connection safely
+     * 
      * @param conn Connection to close
      */
     public static void closeConnection(Connection conn) {

@@ -15,7 +15,8 @@ public class User {
     private Timestamp updatedAt;
 
     // Constructors
-    public User() {}
+    public User() {
+    }
 
     public User(String email, String passwordHash, String firstName, String lastName, String phone, String role) {
         this.email = email;

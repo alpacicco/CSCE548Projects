@@ -16,7 +16,8 @@ public class Product {
     private Timestamp updatedAt;
 
     // Constructors
-    public Product() {}
+    public Product() {
+    }
 
     public Product(Integer categoryId, String name, String description, BigDecimal price, Integer stock, String sku) {
         this.categoryId = categoryId;
