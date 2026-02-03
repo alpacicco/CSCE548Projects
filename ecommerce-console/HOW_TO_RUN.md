@@ -11,7 +11,8 @@ net start MySQL84
 # Create database and schema
 mysql -u root -p < sql/01_schema.sql
 
-# Load test data (92+ rows)
+$env:Path += ";C:\Program Files\MySQL\MySQL Server 8.4\bin"
+mysql -u root -e "USE ecommerce_db; SELECT 'Total Rows' as Metric, (SELECT COUNT(*) FROM categories) + (SELECT COUNT(*) FROM users) + (SELECT COUNT(*) FROM addresses) + (SELECT COUNT(*) FROM products) + (SELECT COUNT(*) FROM orders) + (SELECT COUNT(*) FROM order_items) + (SELECT COUNT(*) FROM payments) + (SELECT COUNT(*) FROM inventory_logs) as Count;"# Load test data (92+ rows)
 mysql -u root -p < sql/02_seed_data.sql
 
 # Verify data loaded
