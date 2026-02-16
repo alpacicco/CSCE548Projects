@@ -1,0 +1,38 @@
+# Heroku Procfile for deploying E-Commerce REST API
+# 
+# HEROKU HOSTING INSTRUCTIONS:
+# ============================
+# 
+# 1. INSTALL HEROKU CLI:
+#    Download from: https://devcenter.heroku.com/articles/heroku-cli
+# 
+# 2. LOGIN TO HEROKU:
+#    heroku login
+# 
+# 3. CREATE HEROKU APP:
+#    heroku create your-ecommerce-api
+# 
+# 4. ADD MYSQL DATABASE (ClearDB or JawsDB):
+#    heroku addons:create jawsdb:kitefin
+#    Or use your own external MySQL database
+# 
+# 5. CONFIGURE ENVIRONMENT VARIABLES:
+#    heroku config:set DB_HOST=your-db-host
+#    heroku config:set DB_PORT=3306
+#    heroku config:set DB_NAME=ecommerce_db
+#    heroku config:set DB_USER=your-user
+#    heroku config:set DB_PASSWORD=your-password
+# 
+# 6. DEPLOY TO HEROKU:
+#    git add .
+#    git commit -m "Deploy to Heroku"
+#    git push heroku main
+# 
+# 7. OPEN YOUR APP:
+#    heroku open
+#    Or visit: https://your-ecommerce-api.herokuapp.com/api/users
+# 
+# 8. VIEW LOGS:
+#    heroku logs --tail
+
+web: java -jar target/ecommerce-console-1.0-SNAPSHOT.jar
