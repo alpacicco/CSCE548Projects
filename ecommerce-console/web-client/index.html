@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Commerce Web Client - Project 3</title>
+    <link rel="stylesheet" href="styles.css?v=20260225-1">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>🛒 E-Commerce System - Web Client</h1>
+            <p class="subtitle">CSCE 548 - Project 3 | REST API Frontend</p>
+            <div class="api-config">
+                <label for="apiUrl">API Base URL:</label>
+                <input type="text" id="apiUrl" value="http://localhost:8080" placeholder="http://localhost:8080">
+                <button onclick="testConnection()" class="btn-primary">Test Connection</button>
+                <span id="connectionStatus"></span>
+            </div>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab-btn active" onclick="openTab('products')">Products</button>
+            <button class="tab-btn" onclick="openTab('orders')">Orders</button>
+            <button class="tab-btn" onclick="openTab('categories')">Categories</button>
+            <button class="tab-btn" onclick="openTab('users')">Users</button>
+        </nav>
+
+        <!-- PRODUCTS TAB -->
+        <div id="products" class="tab-content active">
+            <h2>📦 Products Management</h2>
+
+            <div class="action-group">
+                <button onclick="getAllProducts()" class="btn-primary">Get All Products</button>
+
+                <div class="input-group">
+                    <input type="number" id="productId" placeholder="Product ID">
+                    <button onclick="getProductById()" class="btn-secondary">Get Product by ID</button>
+                </div>
+
+                <div class="input-group">
+                    <input type="number" id="categoryIdForProducts" placeholder="Category ID">
+                    <button onclick="getProductsByCategory()" class="btn-secondary">Get Products by Category</button>
+                </div>
+
+                <div class="input-group">
+                    <input type="number" id="productIdForStock" placeholder="Product ID">
+                    <button onclick="checkProductStock()" class="btn-secondary">Check Stock Status</button>
+                </div>
+
+                <h3 class="crud-title">Create Product (POST)</h3>
+                <div class="input-group">
+                    <input type="number" id="productCreateCategoryId" placeholder="Category ID">
+                    <input type="text" id="productCreateName" placeholder="Name">
+                    <input type="text" id="productCreateSku" placeholder="SKU">
+                </div>
+                <div class="input-group">
+                    <input type="number" step="0.01" id="productCreatePrice" placeholder="Price">
+                    <input type="number" id="productCreateStock" placeholder="Stock">
+                    <select id="productCreateIsActive">
+                        <option value="true">Active</option>
+                        <option value="false">Inactive</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <textarea id="productCreateDescription" placeholder="Description"></textarea>
+                    <button onclick="createProduct()" class="btn-secondary">Create Product</button>
+                </div>
+
+                <h3 class="crud-title">Update Product (PUT)</h3>
+                <div class="input-group">
+                    <input type="number" id="productUpdateId" placeholder="Product ID">
+                    <input type="number" id="productUpdateCategoryId" placeholder="Category ID">
+                    <input type="text" id="productUpdateName" placeholder="Name">
+                </div>
+                <div class="input-group">
+                    <input type="text" id="productUpdateSku" placeholder="SKU">
+                    <input type="number" step="0.01" id="productUpdatePrice" placeholder="Price">
+                    <input type="number" id="productUpdateStock" placeholder="Stock">
+                </div>
+                <div class="input-group">
+                    <select id="productUpdateIsActive">
+                        <option value="true">Active</option>
+                        <option value="false">Inactive</option>
+                    </select>
+                    <textarea id="productUpdateDescription" placeholder="Description"></textarea>
+                    <button onclick="updateProduct()" class="btn-secondary">Update Product</button>
+                </div>
+
+                <h3 class="crud-title">Delete Product (DELETE)</h3>
+                <div class="input-group">
+                    <input type="number" id="productDeleteId" placeholder="Product ID">
+                    <button onclick="deleteProduct()" class="btn-danger">Delete Product</button>
+                </div>
+            </div>
+
+            <div id="productsResult" class="result-container"></div>
+        </div>
+
+        <!-- ORDERS TAB -->
+        <div id="orders" class="tab-content">
+            <h2>📋 Orders Management</h2>
+
+            <div class="action-group">
+                <button onclick="getAllOrders()" class="btn-primary">Get All Orders</button>
+
+                <div class="input-group">
+                    <input type="number" id="orderId" placeholder="Order ID">
+                    <button onclick="getOrderById()" class="btn-secondary">Get Order by ID</button>
+                </div>
+
+                <div class="input-group">
+                    <input type="number" id="userIdForOrders" placeholder="User ID">
+                    <button onclick="getOrdersByUserId()" class="btn-secondary">Get Orders by User ID</button>
+                </div>
+
+                <div class="input-group">
+                    <input type="number" id="userIdForCount" placeholder="User ID">
+                    <button onclick="getUserOrderCount()" class="btn-secondary">Get User Order Count</button>
+                </div>
+
+                <h3 class="crud-title">Create Order (POST)</h3>
+                <div class="input-group">
+                    <input type="number" id="orderCreateUserId" placeholder="User ID">
+                    <input type="text" id="orderCreateOrderNumber" placeholder="Order Number">
+                    <input type="text" id="orderCreateStatus" placeholder="Status (PENDING, SHIPPED, etc.)">
+                </div>
+                <div class="input-group">
+                    <input type="number" step="0.01" id="orderCreateTotalAmount" placeholder="Total Amount">
+                    <input type="number" id="orderCreateShippingAddressId" placeholder="Shipping Address ID (optional)">
+                    <input type="number" id="orderCreateBillingAddressId" placeholder="Billing Address ID (optional)">
+                </div>
+                <div class="input-group">
+                    <textarea id="orderCreateNotes" placeholder="Notes (optional)"></textarea>
+                    <button onclick="createOrder()" class="btn-secondary">Create Order</button>
+                </div>
+
+                <h3 class="crud-title">Update Order (PUT)</h3>
+                <div class="input-group">
+                    <input type="number" id="orderUpdateId" placeholder="Order ID">
+                    <input type="number" id="orderUpdateUserId" placeholder="User ID">
+                    <input type="text" id="orderUpdateOrderNumber" placeholder="Order Number">
+                </div>
+                <div class="input-group">
+                    <input type="text" id="orderUpdateStatus" placeholder="Status">
+                    <input type="number" step="0.01" id="orderUpdateTotalAmount" placeholder="Total Amount">
+                    <input type="number" id="orderUpdateShippingAddressId" placeholder="Shipping Address ID (optional)">
+                </div>
+                <div class="input-group">
+                    <input type="number" id="orderUpdateBillingAddressId" placeholder="Billing Address ID (optional)">
+                    <textarea id="orderUpdateNotes" placeholder="Notes (optional)"></textarea>
+                    <button onclick="updateOrder()" class="btn-secondary">Update Order</button>
+                </div>
+
+                <h3 class="crud-title">Delete Order (DELETE)</h3>
+                <div class="input-group">
+                    <input type="number" id="orderDeleteId" placeholder="Order ID">
+                    <button onclick="deleteOrder()" class="btn-danger">Delete Order</button>
+                </div>
+            </div>
+
+            <div id="ordersResult" class="result-container"></div>
+        </div>
+
+        <!-- CATEGORIES TAB -->
+        <div id="categories" class="tab-content">
+            <h2>🏷️ Categories Management</h2>
+
+            <div class="action-group">
+                <button onclick="getAllCategories()" class="btn-primary">Get All Categories</button>
+
+                <div class="input-group">
+                    <input type="number" id="categoryId" placeholder="Category ID">
+                    <button onclick="getCategoryById()" class="btn-secondary">Get Category by ID</button>
+                </div>
+
+                <h3 class="crud-title">Create Category (POST)</h3>
+                <div class="input-group">
+                    <input type="text" id="categoryCreateName" placeholder="Category Name">
+                    <textarea id="categoryCreateDescription" placeholder="Description"></textarea>
+                    <button onclick="createCategory()" class="btn-secondary">Create Category</button>
+                </div>
+
+                <h3 class="crud-title">Update Category (PUT)</h3>
+                <div class="input-group">
+                    <input type="number" id="categoryUpdateId" placeholder="Category ID">
+                    <input type="text" id="categoryUpdateName" placeholder="Category Name">
+                    <textarea id="categoryUpdateDescription" placeholder="Description"></textarea>
+                    <button onclick="updateCategory()" class="btn-secondary">Update Category</button>
+                </div>
+
+                <h3 class="crud-title">Delete Category (DELETE)</h3>
+                <div class="input-group">
+                    <input type="number" id="categoryDeleteId" placeholder="Category ID">
+                    <button onclick="deleteCategory()" class="btn-danger">Delete Category</button>
+                </div>
+            </div>
+
+            <div id="categoriesResult" class="result-container"></div>
+        </div>
+
+        <!-- USERS TAB -->
+        <div id="users" class="tab-content">
+            <h2>👥 Users Management</h2>
+
+            <div class="action-group">
+                <button onclick="getAllUsers()" class="btn-primary">Get All Users</button>
+
+                <div class="input-group">
+                    <input type="number" id="userId" placeholder="User ID">
+                    <button onclick="getUserById()" class="btn-secondary">Get User by ID</button>
+                </div>
+
+                <div class="input-group">
+                    <input type="email" id="userEmail" placeholder="user@example.com">
+                    <button onclick="getUserByEmail()" class="btn-secondary">Get User by Email</button>
+                </div>
+
+                <h3 class="crud-title">Create User (POST)</h3>
+                <div class="input-group">
+                    <input type="email" id="userCreateEmail" placeholder="Email">
+                    <input type="text" id="userCreatePasswordHash" placeholder="Password">
+                    <input type="text" id="userCreateFirstName" placeholder="First Name">
+                </div>
+                <div class="input-group">
+                    <input type="text" id="userCreateLastName" placeholder="Last Name">
+                    <input type="text" id="userCreatePhone" placeholder="Phone">
+                    <input type="text" id="userCreateRole" placeholder="Role (CUSTOMER, ADMIN)">
+                </div>
+                <div class="input-group">
+                    <select id="userCreateIsActive">
+                        <option value="true">Active</option>
+                        <option value="false">Inactive</option>
+                    </select>
+                    <button onclick="createUser()" class="btn-secondary">Create User</button>
+                </div>
+
+                <h3 class="crud-title">Update User (PUT)</h3>
+                <div class="input-group">
+                    <input type="number" id="userUpdateId" placeholder="User ID">
+                    <input type="email" id="userUpdateEmail" placeholder="Email">
+                    <input type="text" id="userUpdatePasswordHash" placeholder="Password">
+                </div>
+                <div class="input-group">
+                    <input type="text" id="userUpdateFirstName" placeholder="First Name">
+                    <input type="text" id="userUpdateLastName" placeholder="Last Name">
+                    <input type="text" id="userUpdatePhone" placeholder="Phone">
+                </div>
+                <div class="input-group">
+                    <input type="text" id="userUpdateRole" placeholder="Role">
+                    <select id="userUpdateIsActive">
+                        <option value="true">Active</option>
+                        <option value="false">Inactive</option>
+                    </select>
+                    <button onclick="updateUser()" class="btn-secondary">Update User</button>
+                </div>
+
+                <h3 class="crud-title">Delete User (DELETE)</h3>
+                <div class="input-group">
+                    <input type="number" id="userDeleteId" placeholder="User ID">
+                    <button onclick="deleteUser()" class="btn-danger">Delete User</button>
+                </div>
+            </div>
+
+            <div id="usersResult" class="result-container"></div>
+        </div>
+
+        <footer>
+            <p>Project 3 - E-Commerce Web Client | Full CRUD implemented for Products, Orders, Categories, and Users</p>
+        </footer>
+    </div>
+
+    <script src="app.js?v=20260225-1"></script>
+</body>
+
+</html>
