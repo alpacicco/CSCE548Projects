@@ -1,23 +1,48 @@
-# E-Commerce Console Application
+# E-Commerce N-Tier Application
 
-A professional-quality console-based e-commerce system built with Java 17+ and MySQL 8+, featuring a complete relational database schema, comprehensive DAO layer, and interactive CLI interface.
+[![Java](https://img.shields.io/badge/Java-17-blue.svg)](https://adoptium.net)
+[![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2-green.svg)](https://spring.io/projects/spring-boot)
+[![MySQL](https://img.shields.io/badge/MySQL-8.0-orange.svg)](https://www.mysql.com)
+[![License: Educational](https://img.shields.io/badge/License-Educational-lightgrey.svg)](LICENSE)
+
+A fully functional **4-tier e-commerce application** built for CSCE 548 (Database Management Systems), demonstrating a complete n-tier architecture from a MySQL relational database through a Java Spring Boot REST API to a browser-based web client.
+
+> **CSCE 548 – Project 4** · Spring 2026
+
+---
+
+## 📐 Architecture
+
+```
+[Browser Web Client]  ←→  [Spring Boot REST API]  ←→  [Business Services]  ←→  [MySQL 8]
+  HTML / CSS / JS            port 8080                    Java Services          ecommerce_db
+  (Tier 4 – Client)       (Tier 3 – Service)           (Tier 2 – Business)   (Tier 1 – Data)
+```
+
+---
 
 ## 🏗️ Project Structure
 
 ```
 ecommerce-console/
-├── src/main/java/com/ecommerce/
-│   ├── model/          # POJOs (Category, User, Product, Order, OrderItem, Address, Payment)
-│   ├── dao/            # DAO interfaces and implementations
-│   ├── db/             # Database connection utility
-│   ├── ui/             # Console user interface
-│   └── Main.java       # Application entry point
 ├── sql/
-│   ├── 01_schema.sql   # Database schema with constraints
-│   └── 02_seed_data.sql # Test data (92+ rows)
-├── pom.xml             # Maven configuration
-├── .env.example        # Environment configuration template
-└── README.md           # This file
+│   ├── 01_schema.sql        # Database schema – 8 tables, 9 FK constraints
+│   └── 02_seed_data.sql     # Test data – 92 rows across all tables
+├── src/main/java/com/ecommerce/
+│   ├── model/               # POJOs: Category, User, Product, Order, OrderItem, Address, Payment
+│   ├── dao/                 # DAO interfaces + JDBC implementations
+│   ├── db/                  # DatabaseConnection utility (.env-based config)
+│   ├── service/             # Business layer: validation & orchestration
+│   ├── controller/          # Spring REST controllers (service layer)
+│   └── Application.java     # Spring Boot entry point
+├── web-client/
+│   ├── index.html           # Single-page application UI
+│   ├── app.js               # All API calls and DOM logic
+│   └── styles.css           # Responsive styling
+├── pom.xml                  # Maven – Spring Boot 3.2, MySQL connector, dotenv
+├── .env.example             # Database credentials template
+├── DEPLOYMENT.md            # Full step-by-step deployment guide
+└── README.md                # This file
 ```
 
 ## 📊 Database Schema
@@ -116,88 +141,98 @@ DB_PASSWORD=your_actual_password
 
 ### Step 4: Build & Run
 
-1. **Install dependencies:**
+1. **Build (download dependencies + compile):**
 ```bash
-mvn clean install
+mvn clean package -DskipTests
 ```
 
-2. **Run application:**
+2. **Run the REST API:**
 ```bash
-mvn exec:java
-```
-
-**Alternative (compiled JAR):**
-```bash
-mvn package
+mvn spring-boot:run
+# or
 java -jar target/ecommerce-console-1.0-SNAPSHOT.jar
+```
+
+3. **Open the web client:**
+```bash
+# Option A – open directly
+start web-client/index.html
+
+# Option B – serve on localhost:3000 (avoids CORS issues)
+python -m http.server 3000 --directory web-client
 ```
 
 ## 🎮 Using the Application
 
-### Main Menu Options
+### Starting the Back End
 
-1. **List All Products** - View all products with price, stock, SKU
-2. **Search Products by Category** - Filter products by category
-3. **Create New User** - Register a new customer/admin
-4. **Place Order** - Create order and add multiple products
-5. **View Orders for User** - See order history by user ID
-6. **Update Product Price/Stock** - Modify product details
-7. **Delete Product** - Remove product (respects FK constraints)
-8. **List All Categories** - View all product categories
-9. **List All Users** - View all registered users
-10. **View Order Details** - See complete order with line items
-
-### Example Workflow: Place an Order
-
-1. Select option `4` (Place Order)
-2. Enter user ID (e.g., `1`)
-3. System creates order with auto-generated order number
-4. Add products by entering Product ID and quantity
-5. System validates stock availability
-6. System updates product stock automatically
-7. Enter `0` when done adding products
-8. Order is saved with calculated total
-
-## 📸 Screenshots Checklist
-
-For your instructor submission, capture these screenshots:
-
-### 1. ER Diagram in MySQL Workbench
-- Open MySQL Workbench
-- Database → Reverse Engineer
-- Select `ecommerce_db`
-- Capture final ER diagram showing all 8 tables and relationships
-
-### 2. Proof of 50+ Rows
-```sql
--- Run this query and screenshot results
-SELECT 'Categories' AS table_name, COUNT(*) AS row_count FROM categories
-UNION ALL SELECT 'Users', COUNT(*) FROM users
-UNION ALL SELECT 'Addresses', COUNT(*) FROM addresses
-UNION ALL SELECT 'Products', COUNT(*) FROM products
-UNION ALL SELECT 'Orders', COUNT(*) FROM orders
-UNION ALL SELECT 'Order Items', COUNT(*) FROM order_items
-UNION ALL SELECT 'Payments', COUNT(*) FROM payments
-UNION ALL SELECT 'Inventory Logs', COUNT(*) FROM inventory_logs;
+```powershell
+mvn spring-boot:run
 ```
 
-### 3. Console Output - Data Retrieval
-- Screenshot of "List All Products" showing formatted table
-- Screenshot of "Search Products by Category" results
-- Screenshot of "View Order Details" with joined data
+The REST API starts on **http://localhost:8080**.
 
-### 4. Console Output - CRUD Operations
-- Screenshot of "Create New User" success message
-- Screenshot of "Place Order" workflow
-- Screenshot of "Update Product Price/Stock" confirmation
+### Starting the Front End
+
+Open `web-client/index.html` in a browser, or serve it locally:
+
+```powershell
+cd web-client
+python -m http.server 3000
+# then open http://localhost:3000
+```
+
+Click **Test Connection** in the header — you should see **✓ Connected**.
+
+### Example Workflow: Create and Update a Product
+
+1. Open the **Products** tab
+2. Fill in the **Create Product** form (Category ID, Name, SKU, Price, Stock) and click **Create Product**
+3. Note the returned `productId`
+4. Fill in the **Update Product** form with that ID and changed values, click **Update Product**
+5. Click **Get All Products** to confirm the change
+6. Enter the ID in **Delete Product** and click the button to remove it
+
+## 📸 Screenshots Checklist (Project 4)
+
+### 1. Web Client – GET Operations
+- **Products tab → Get All Products** – shows table of 20 products
+- **Products tab → Get Product by ID** (e.g., ID 1) – shows single item card
+- Repeat for Categories, Users, Orders
+
+### 2. Web Client – POST (Create)
+- Fill Create Product form → click **Create Product** → screenshot the JSON response
+- Confirm in MySQL: `SELECT * FROM products ORDER BY product_id DESC LIMIT 1;`
+
+### 3. Web Client – PUT (Update)
+- Fill Update Product form with existing ID → click **Update Product** → screenshot response
+- Confirm in MySQL: `SELECT name, price, stock FROM products WHERE product_id = <id>;`
+
+### 4. Web Client – DELETE
+- Enter an ID → click **Delete Product** → screenshot success message
+- Confirm in MySQL: `SELECT * FROM products WHERE product_id = <id>;` (empty result)
+
+### 5. Database Verification Query
+```sql
+SELECT 'categories' t, COUNT(*) r FROM categories
+UNION ALL SELECT 'users', COUNT(*) FROM users
+UNION ALL SELECT 'addresses', COUNT(*) FROM addresses
+UNION ALL SELECT 'products', COUNT(*) FROM products
+UNION ALL SELECT 'orders', COUNT(*) FROM orders
+UNION ALL SELECT 'order_items', COUNT(*) FROM order_items
+UNION ALL SELECT 'payments', COUNT(*) FROM payments
+UNION ALL SELECT 'inventory_logs', COUNT(*) FROM inventory_logs;
+```
 
 ## 🛠️ Technical Details
 
 ### Technologies
 - **Java 17** - Modern Java features
-- **MySQL 8.3** - Relational database with InnoDB engine
-- **Maven 3.11** - Build automation and dependency management
+- **Spring Boot 3.2** - REST API service layer
+- **MySQL 8.0+** - Relational database with InnoDB engine
+- **Maven 3.6+** - Build automation and dependency management
 - **JDBC** - Direct database connectivity (no ORM)
+- **HTML / CSS / JavaScript** - Browser-based client layer (Tier 4)
 
 ### Dependencies
 ```xml
@@ -288,7 +323,7 @@ Error: Could not find or load main class
 **Solution:**
 ```bash
 mvn clean compile
-mvn exec:java -Dexec.mainClass="com.ecommerce.Main"
+mvn spring-boot:run
 ```
 
 ## 📚 Additional Features

@@ -4,15 +4,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Commerce Web Client - Project 3</title>
-    <link rel="stylesheet" href="styles.css?v=20260225-1">
+    <title>E-Commerce Web Client - Project 4</title>
+    <link rel="stylesheet" href="styles.css?v=20260302-1">
 </head>
 
 <body>
     <div class="container">
         <header>
             <h1>🛒 E-Commerce System - Web Client</h1>
-            <p class="subtitle">CSCE 548 - Project 3 | REST API Frontend</p>
+            <p class="subtitle">CSCE 548 - Project 4 | REST API Frontend</p>
             <div class="api-config">
                 <label for="apiUrl">API Base URL:</label>
                 <input type="text" id="apiUrl" value="http://localhost:8080" placeholder="http://localhost:8080">
@@ -123,14 +123,15 @@
 
                 <h3 class="crud-title">Create Order (POST)</h3>
                 <div class="input-group">
-                    <input type="number" id="orderCreateUserId" placeholder="User ID">
+                    <input type="number" id="orderCreateUserId" placeholder="User ID (1–10)">
                     <input type="text" id="orderCreateOrderNumber" placeholder="Order Number">
                     <input type="text" id="orderCreateStatus" placeholder="Status (PENDING, SHIPPED, etc.)">
                 </div>
                 <div class="input-group">
                     <input type="number" step="0.01" id="orderCreateTotalAmount" placeholder="Total Amount">
-                    <input type="number" id="orderCreateShippingAddressId" placeholder="Shipping Address ID (optional)">
-                    <input type="number" id="orderCreateBillingAddressId" placeholder="Billing Address ID (optional)">
+                    <input type="number" id="orderCreateShippingAddressId" placeholder="Shipping Address ID (1–12)">
+                    <input type="number" id="orderCreateBillingAddressId"
+                        placeholder="Billing Address ID (1–12, optional)">
                 </div>
                 <div class="input-group">
                     <textarea id="orderCreateNotes" placeholder="Notes (optional)"></textarea>
@@ -140,16 +141,18 @@
                 <h3 class="crud-title">Update Order (PUT)</h3>
                 <div class="input-group">
                     <input type="number" id="orderUpdateId" placeholder="Order ID">
-                    <input type="number" id="orderUpdateUserId" placeholder="User ID">
+                    <input type="number" id="orderUpdateUserId" placeholder="User ID (1–10)">
                     <input type="text" id="orderUpdateOrderNumber" placeholder="Order Number">
                 </div>
                 <div class="input-group">
                     <input type="text" id="orderUpdateStatus" placeholder="Status">
                     <input type="number" step="0.01" id="orderUpdateTotalAmount" placeholder="Total Amount">
-                    <input type="number" id="orderUpdateShippingAddressId" placeholder="Shipping Address ID (optional)">
+                    <input type="number" id="orderUpdateShippingAddressId"
+                        placeholder="Shipping Address ID (1–12, optional)">
                 </div>
                 <div class="input-group">
-                    <input type="number" id="orderUpdateBillingAddressId" placeholder="Billing Address ID (optional)">
+                    <input type="number" id="orderUpdateBillingAddressId"
+                        placeholder="Billing Address ID (1–12, optional)">
                     <textarea id="orderUpdateNotes" placeholder="Notes (optional)"></textarea>
                     <button onclick="updateOrder()" class="btn-secondary">Update Order</button>
                 </div>
@@ -268,11 +271,11 @@
         </div>
 
         <footer>
-            <p>Project 3 - E-Commerce Web Client | Full CRUD implemented for Products, Orders, Categories, and Users</p>
+            <p>Project 4 - E-Commerce Web Client | Full CRUD implemented for Products, Orders, Categories, and Users</p>
         </footer>
     </div>
 
-    <script src="app.js?v=20260225-1"></script>
+    <script src="app.js?v=20260302-1"></script>
 </body>
 
 </html>

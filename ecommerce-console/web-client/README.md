@@ -1,7 +1,120 @@
-# E-Commerce Web Client - Project 3
+# E-Commerce Web Client - Project 4
 
 ## Overview
-This is a web-based front-end client for the E-Commerce REST API (Project 2). It demonstrates all GET methods for all database tables (Products, Orders, Categories, and Users).
+This is a browser-based front-end client for the E-Commerce REST API. It provides full CRUD (Create, Read, Update, Delete) functionality for all four entities: Products, Orders, Categories, and Users.
+
+## Features Implemented
+
+### ✅ Full CRUD for Products
+- `GET /api/products` - Get all products
+- `GET /api/products/{id}` - Get product by ID
+- `GET /api/products/category/{categoryId}` - Get products by category
+- `GET /api/products/{id}/stock` - Check product stock status
+- `POST /api/products` - Create a new product
+- `PUT /api/products/{id}` - Update an existing product
+- `DELETE /api/products/{id}` - Delete a product
+
+### ✅ Full CRUD for Orders
+- `GET /api/orders` - Get all orders
+- `GET /api/orders/{id}` - Get order by ID
+- `GET /api/orders/user/{userId}` - Get orders by user ID
+- `GET /api/orders/user/{userId}/count` - Get user's order count
+- `POST /api/orders` - Create a new order
+- `PUT /api/orders/{id}` - Update an existing order
+- `DELETE /api/orders/{id}` - Delete an order
+
+### ✅ Full CRUD for Categories
+- `GET /api/categories` - Get all categories
+- `GET /api/categories/{id}` - Get category by ID
+- `POST /api/categories` - Create a new category
+- `PUT /api/categories/{id}` - Update an existing category
+- `DELETE /api/categories/{id}` - Delete a category
+
+### ✅ Full CRUD for Users
+- `GET /api/users` - Get all users
+- `GET /api/users/{id}` - Get user by ID
+- `GET /api/users/email/{email}` - Get user by email
+- `POST /api/users` - Register a new user
+- `PUT /api/users/{id}` - Update an existing user
+- `DELETE /api/users/{id}` - Delete a user
+
+## How to Run
+
+### Step 1: Start the REST API Server
+```powershell
+cd C:\Users\Owner\Desktop\CSCE548\CSCE548Projects\ecommerce-console
+mvn spring-boot:run
+```
+The server starts on `http://localhost:8080`.
+
+### Step 2: Open the Web Client
+
+**Option A: Open directly**
+```powershell
+cd web-client
+start index.html
+```
+
+**Option B: Serve locally (recommended – avoids CORS issues)**
+```powershell
+python -m http.server 3000 --directory web-client
+# then open http://localhost:3000
+```
+
+### Step 3: Use the Client
+1. The page auto-tests connection to `http://localhost:8080`
+2. Click through tabs: **Products**, **Orders**, **Categories**, **Users**
+3. Use GET buttons to read data, and the Create / Update / Delete forms to mutate data
+
+## Taking Screenshots for Project 4
+
+Capture before/after screenshots for each CRUD operation:
+
+1. **GET All** – table of all records
+2. **GET by ID** – single item card
+3. **POST (Create)** – fill form, submit, screenshot JSON response + MySQL `SELECT`
+4. **PUT (Update)** – fill form with changed values, submit, confirm in MySQL
+5. **DELETE** – enter ID, submit, confirm empty `SELECT` in MySQL
+
+## Troubleshooting
+
+### "Connection Failed" Error
+- Confirm Spring Boot is running: `mvn spring-boot:run`
+- Check that the API URL field shows `http://localhost:8080`
+
+### "No data found"
+- Ensure seed data was loaded: `mysql -u root -p < sql/02_seed_data.sql`
+- Check the server console for stack traces
+
+### CORS Issues
+- All controllers use `@CrossOrigin(origins = "*")` – should not be an issue
+- If opening via `file://`, use the Python HTTP server method instead
+
+## Files Structure
+```
+web-client/
+├── index.html    # Single-page application UI
+├── styles.css    # Responsive styling
+├── app.js        # All API calls and DOM logic
+└── README.md     # This file
+```
+
+## Technology Stack
+- **Frontend**: Pure HTML5, CSS3, Vanilla JavaScript (no frameworks)
+- **API Communication**: Fetch API
+- **Hosting**: Local file system or any static web server
+
+## Project 4 Deliverables Checklist
+- ✅ Web client created with full CRUD on all four entities
+- ✅ All GET methods implemented and tested
+- ✅ All POST (create) methods implemented and tested
+- ✅ All PUT (update) methods implemented and tested
+- ✅ All DELETE methods implemented and tested
+- ✅ Client hosted and functional
+- 📸 Take screenshots and consolidate into PDF
+- 📤 Submit PDF to Blackboard
+- 📤 Submit GitHub URL to Blackboard
+
 
 ## Features Implemented
 
@@ -38,107 +151,3 @@ cd C:\Users\Owner\Desktop\CSCE548\CSCE548Projects\ecommerce-console
 # Start the Spring Boot server
 mvn spring-boot:run
 ```
-
-The server should start on `http://localhost:8080`
-
-### Step 2: Open the Web Client
-Simply open the `index.html` file in a web browser:
-
-**Option A: Double-click the file**
-- Navigate to `ecommerce-console/web-client/`
-- Double-click `index.html`
-
-**Option B: Use PowerShell**
-```powershell
-cd web-client
-start index.html
-```
-
-**Option C: Right-click and "Open with"**
-- Right-click `index.html`
-- Choose "Open with" → Your preferred browser (Chrome, Edge, Firefox)
-
-### Step 3: Use the Client
-1. The page will automatically test the connection to `http://localhost:8080`
-2. Click through the tabs: **Products**, **Orders**, **Categories**, **Users**
-3. Use the buttons to call different GET endpoints
-4. Results will display in a formatted table or card view
-
-## Taking Screenshots for Project 3
-
-To fulfill the project requirements, take screenshots of:
-
-1. **Products Tab**
-   - Get All Products
-   - Get Product by ID (pick an ID from the list)
-   - Get Products by Category (use a category ID)
-   - Check Stock Status
-
-2. **Orders Tab**
-   - Get All Orders
-   - Get Order by ID
-   - Get Orders by User ID
-   - Get User Order Count
-
-3. **Categories Tab**
-   - Get All Categories
-   - Get Category by ID
-
-4. **Users Tab**
-   - Get All Users
-   - Get User by ID
-   - Get User by Email
-
-## Troubleshooting
-
-### "Connection Failed" Error
-- Make sure the Spring Boot server is running (`mvn spring-boot:run`)
-- Check that the server is on port 8080
-- If using a different port, update the API URL field in the web client
-
-### "No data found"
-- Make sure your MySQL database has data
-- Check the server console for any errors
-
-### CORS Issues
-- Your controllers already have `@CrossOrigin(origins = "*")` so this should work
-- If you still have CORS issues, make sure your Spring Boot app is running
-
-## Files Structure
-```
-web-client/
-├── index.html    # Main HTML page with UI
-├── styles.css    # Styling and responsive design
-├── app.js        # JavaScript API calls and logic
-└── README.md     # This file
-```
-
-## Technology Stack
-- **Frontend**: Pure HTML5, CSS3, JavaScript (Vanilla JS - No frameworks)
-- **API Communication**: Fetch API
-- **Design**: Responsive design with gradient styling
-- **Hosting**: Local file system (can be hosted on any web server)
-
-## API Configuration
-The default API URL is `http://localhost:8080`. You can change it:
-1. At the top of the page, find the "API Base URL" field
-2. Enter your API URL (e.g., `http://localhost:8081` if using different port)
-3. Click "Test Connection"
-
-## Project 3 Deliverables Checklist
-- ✅ Web client created
-- ✅ All GET methods for Products implemented
-- ✅ All GET methods for Orders implemented
-- ✅ All GET methods for Categories implemented
-- ✅ All GET methods for Users implemented
-- ✅ Client is hosted (local file system)
-- ✅ Functionality tested
-- 📸 Take screenshots and consolidate into PDF
-- 📤 Submit PDF to Blackboard
-- 📤 Submit GitHub URL to Blackboard
-
-## Notes
-- This web client only implements GET methods as required by Project 3
-- The UI is responsive and works on desktop, tablet, and mobile
-- All data is fetched in real-time from your REST API
-- No additional libraries or frameworks required
