@@ -225,11 +225,16 @@
                 <div class="input-group">
                     <input type="email" id="userCreateEmail" placeholder="Email">
                     <input type="text" id="userCreatePasswordHash" placeholder="Password">
-                    <input type="text" id="userCreateFirstName" placeholder="First Name">
+                    <input type="text" id="userCreateFirstName" placeholder="First Name"
+                        oninput="autoGenerateUsername()">
                 </div>
                 <div class="input-group">
-                    <input type="text" id="userCreateLastName" placeholder="Last Name">
+                    <input type="text" id="userCreateLastName" placeholder="Last Name" oninput="autoGenerateUsername()">
+                    <input type="text" id="userCreateUsername" placeholder="Username (auto-generated)" readonly
+                        style="background:#f0f0f0;cursor:not-allowed;">
                     <input type="text" id="userCreatePhone" placeholder="Phone">
+                </div>
+                <div class="input-group">
                     <input type="text" id="userCreateRole" placeholder="Role (CUSTOMER, ADMIN)">
                 </div>
                 <div class="input-group">

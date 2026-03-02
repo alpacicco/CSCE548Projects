@@ -11,18 +11,19 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public User create(User user) throws SQLException {
-        String sql = "INSERT INTO users (email, password_hash, first_name, last_name, phone, role, is_active) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO users (email, username, password_hash, first_name, last_name, phone, role, is_active) VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
 
         try (Connection conn = DatabaseConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
 
             stmt.setString(1, user.getEmail());
-            stmt.setString(2, user.getPasswordHash());
-            stmt.setString(3, user.getFirstName());
-            stmt.setString(4, user.getLastName());
-            stmt.setString(5, user.getPhone());
-            stmt.setString(6, user.getRole());
-            stmt.setBoolean(7, user.getIsActive() != null ? user.getIsActive() : true);
+            stmt.setString(2, user.getUsername());
+            stmt.setString(3, user.getPasswordHash());
+            stmt.setString(4, user.getFirstName());
+            stmt.setString(5, user.getLastName());
+            stmt.setString(6, user.getPhone());
+            stmt.setString(7, user.getRole());
+            stmt.setBoolean(8, user.getIsActive() != null ? user.getIsActive() : true);
 
             int affectedRows = stmt.executeUpdate();
 
@@ -80,19 +81,20 @@ public class UserDAOImpl implements UserDAO {
 
     @Override
     public boolean update(User user) throws SQLException {
-        String sql = "UPDATE users SET email = ?, password_hash = ?, first_name = ?, last_name = ?, phone = ?, role = ?, is_active = ? WHERE user_id = ?";
+        String sql = "UPDATE users SET email = ?, username = ?, password_hash = ?, first_name = ?, last_name = ?, phone = ?, role = ?, is_active = ? WHERE user_id = ?";
 
         try (Connection conn = DatabaseConnection.getConnection();
                 PreparedStatement stmt = conn.prepareStatement(sql)) {
 
             stmt.setString(1, user.getEmail());
-            stmt.setString(2, user.getPasswordHash());
-            stmt.setString(3, user.getFirstName());
-            stmt.setString(4, user.getLastName());
-            stmt.setString(5, user.getPhone());
-            stmt.setString(6, user.getRole());
-            stmt.setBoolean(7, user.getIsActive());
-            stmt.setInt(8, user.getUserId());
+            stmt.setString(2, user.getUsername());
+            stmt.setString(3, user.getPasswordHash());
+            stmt.setString(4, user.getFirstName());
+            stmt.setString(5, user.getLastName());
+            stmt.setString(6, user.getPhone());
+            stmt.setString(7, user.getRole());
+            stmt.setBoolean(8, user.getIsActive());
+            stmt.setInt(9, user.getUserId());
 
             return stmt.executeUpdate() > 0;
         }
@@ -133,6 +135,7 @@ public class UserDAOImpl implements UserDAO {
         User user = new User();
         user.setUserId(rs.getInt("user_id"));
         user.setEmail(rs.getString("email"));
+        user.setUsername(rs.getString("username"));
         user.setPasswordHash(rs.getString("password_hash"));
         user.setFirstName(rs.getString("first_name"));
         user.setLastName(rs.getString("last_name"));

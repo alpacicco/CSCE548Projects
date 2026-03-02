@@ -588,13 +588,34 @@ async function getUserByEmail() {
     }
 }
 
+function generateUsername(firstName, lastName) {
+    const fi = (firstName || '').charAt(0).toLowerCase() || 'x';
+    const li = (lastName || '').charAt(0).toLowerCase() || 'x';
+    const n1 = Math.floor(Math.random() * 9) + 1;
+    const n2 = Math.floor(Math.random() * 9) + 1;
+    return `${fi}_${li}_${n1}_${n2}`;
+}
+
+function autoGenerateUsername() {
+    const firstName = document.getElementById('userCreateFirstName').value.trim();
+    const lastName = document.getElementById('userCreateLastName').value.trim();
+    if (firstName || lastName) {
+        document.getElementById('userCreateUsername').value = generateUsername(firstName, lastName);
+    }
+}
+
 async function createUser() {
     try {
+        const firstName = document.getElementById('userCreateFirstName').value.trim();
+        const lastName = document.getElementById('userCreateLastName').value.trim();
+        let username = document.getElementById('userCreateUsername').value.trim();
+        if (!username) username = generateUsername(firstName, lastName);
         const payload = {
             email: document.getElementById('userCreateEmail').value.trim(),
+            username: username,
             passwordHash: document.getElementById('userCreatePasswordHash').value.trim(),
-            firstName: document.getElementById('userCreateFirstName').value.trim(),
-            lastName: document.getElementById('userCreateLastName').value.trim(),
+            firstName: firstName,
+            lastName: lastName,
             phone: document.getElementById('userCreatePhone').value.trim(),
             role: document.getElementById('userCreateRole').value.trim(),
             isActive: document.getElementById('userCreateIsActive').value === 'true'
