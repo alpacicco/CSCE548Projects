@@ -20,17 +20,17 @@ INSERT INTO categories (name, description) VALUES
 -- Users (10 rows – 1 admin + 9 customers)
 -- Passwords are SHA-256 hashes of "password123" for demo purposes
 -- =============================================================
-INSERT INTO users (email, password_hash, first_name, last_name, phone, role, is_active) VALUES
-('admin@ecommerce.com',   'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'System', 'Admin',    '555-0100', 'ADMIN',    TRUE),
-('alice@example.com',     'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'Alice',  'Johnson',  '555-0101', 'CUSTOMER', TRUE),
-('bob@example.com',       'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'Bob',    'Smith',    '555-0102', 'CUSTOMER', TRUE),
-('carol@example.com',     'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'Carol',  'Williams', '555-0103', 'CUSTOMER', TRUE),
-('dave@example.com',      'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'Dave',   'Brown',    '555-0104', 'CUSTOMER', TRUE),
-('eve@example.com',       'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'Eve',    'Jones',    '555-0105', 'CUSTOMER', TRUE),
-('frank@example.com',     'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'Frank',  'Garcia',   '555-0106', 'CUSTOMER', TRUE),
-('grace@example.com',     'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'Grace',  'Martinez', '555-0107', 'CUSTOMER', TRUE),
-('henry@example.com',     'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'Henry',  'Davis',    '555-0108', 'CUSTOMER', TRUE),
-('iris@example.com',      'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'Iris',   'Wilson',   '555-0109', 'CUSTOMER', FALSE);
+INSERT INTO users (email, username, password_hash, first_name, last_name, phone, role, is_active) VALUES
+('admin@ecommerce.com',   's_a_3_7', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'System', 'Admin',    '555-0100', 'ADMIN',    TRUE),
+('alice@example.com',     'a_j_5_2', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'Alice',  'Johnson',  '555-0101', 'CUSTOMER', TRUE),
+('bob@example.com',       'b_s_8_1', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'Bob',    'Smith',    '555-0102', 'CUSTOMER', TRUE),
+('carol@example.com',     'c_w_4_6', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'Carol',  'Williams', '555-0103', 'CUSTOMER', TRUE),
+('dave@example.com',      'd_b_2_9', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'Dave',   'Brown',    '555-0104', 'CUSTOMER', TRUE),
+('eve@example.com',       'e_j_7_3', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'Eve',    'Jones',    '555-0105', 'CUSTOMER', TRUE),
+('frank@example.com',     'f_g_1_5', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'Frank',  'Garcia',   '555-0106', 'CUSTOMER', TRUE),
+('grace@example.com',     'g_m_6_4', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'Grace',  'Martinez', '555-0107', 'CUSTOMER', TRUE),
+('henry@example.com',     'h_d_9_2', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'Henry',  'Davis',    '555-0108', 'CUSTOMER', TRUE),
+('iris@example.com',      'i_w_3_8', 'ef92b778bafe771e89245b89ecbc08a44a4e166c06659911881f383d4473e94f', 'Iris',   'Wilson',   '555-0109', 'CUSTOMER', FALSE);
 
 -- =============================================================
 -- Addresses (12 rows)

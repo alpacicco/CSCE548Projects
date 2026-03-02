@@ -31,6 +31,7 @@ CREATE TABLE categories (
 CREATE TABLE users (
     user_id       INT           NOT NULL AUTO_INCREMENT,
     email         VARCHAR(150)  NOT NULL,
+    username      VARCHAR(50)   UNIQUE,
     password_hash VARCHAR(255)  NOT NULL,
     first_name    VARCHAR(80)   NOT NULL,
     last_name     VARCHAR(80)   NOT NULL,
