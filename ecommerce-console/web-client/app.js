@@ -1,6 +1,3 @@
-// Global API Base URL
-let API_BASE_URL = 'http://localhost:8080';
-
 // Update API URL from input
 function updateApiUrl() {
     const urlInput = document.getElementById('apiUrl');
@@ -12,17 +9,16 @@ function updateApiUrl() {
 }
 
 // Test API Connection
+// ✅ FIXED BASE URL (CRITICAL)
+let API_BASE_URL = 'http://localhost:8080';
+
+// Test API Connection (FIXED)
 async function testConnection() {
-    updateApiUrl();
     const statusEl = document.getElementById('connectionStatus');
-    statusEl.textContent = 'Testing...';
-    statusEl.className = '';
 
     try {
-        const response = await fetch(`${API_BASE_URL}/api/products`, {
-            method: 'GET',
-            headers: { 'Accept': 'application/json' }
-        });
+        const response = await fetch(`${API_BASE_URL}/api/products`);
+
         if (response.ok) {
             statusEl.textContent = '✓ Connected';
             statusEl.className = 'success';
@@ -33,7 +29,7 @@ async function testConnection() {
     } catch (error) {
         statusEl.textContent = '✗ Connection Failed';
         statusEl.className = 'error';
-        console.error('Connection test failed:', error);
+        console.error(error);
     }
 }
 
