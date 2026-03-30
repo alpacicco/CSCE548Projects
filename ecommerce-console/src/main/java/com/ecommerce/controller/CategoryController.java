@@ -21,13 +21,11 @@ public class CategoryController {
 
     @GetMapping
     public ResponseEntity<?> getAllCategories() {
-        List<Map<String, Object>> categories = List.of(
+        return ResponseEntity.ok(List.of(
                 Map.of("categoryId", 1, "name", "Electronics"),
                 Map.of("categoryId", 2, "name", "Clothing"),
                 Map.of("categoryId", 3, "name", "Books")
-        );
-
-        return ResponseEntity.ok(categories);
+        ));
     }
 
     @GetMapping("/{id}")

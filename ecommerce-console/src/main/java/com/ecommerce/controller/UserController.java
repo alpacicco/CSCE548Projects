@@ -29,12 +29,16 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getUserById(@PathVariable Integer id) {
-        return ResponseEntity.ok(Map.of("userId", id, "name", "Sample User"));
+        return ResponseEntity.ok(
+                Map.of("userId", id, "name", "Sample User")
+        );
     }
 
     @GetMapping("/email/{email}")
     public ResponseEntity<?> getUserByEmail(@PathVariable String email) {
-        return ResponseEntity.ok(Map.of("email", email, "name", "User"));
+        return ResponseEntity.ok(
+                Map.of("email", email, "name", "Sample User")
+        );
     }
 
     @PostMapping

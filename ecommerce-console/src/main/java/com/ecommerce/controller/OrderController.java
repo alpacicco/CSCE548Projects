@@ -29,7 +29,9 @@ public class OrderController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getOrderById(@PathVariable Integer id) {
-        return ResponseEntity.ok(Map.of("orderId", id, "status", "SHIPPED"));
+        return ResponseEntity.ok(
+                Map.of("orderId", id, "status", "SHIPPED")
+        );
     }
 
     @GetMapping("/user/{userId}")

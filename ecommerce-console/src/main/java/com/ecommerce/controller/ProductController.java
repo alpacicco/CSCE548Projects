@@ -21,12 +21,10 @@ public class ProductController {
 
     @GetMapping
     public ResponseEntity<?> getAllProducts() {
-        List<Map<String, Object>> products = List.of(
+        return ResponseEntity.ok(List.of(
                 Map.of("productId", 1, "name", "Laptop", "price", 1200, "stock", 10, "categoryId", 1),
                 Map.of("productId", 2, "name", "Shirt", "price", 40, "stock", 50, "categoryId", 2)
-        );
-
-        return ResponseEntity.ok(products);
+        ));
     }
 
     @GetMapping("/{id}")
@@ -38,9 +36,9 @@ public class ProductController {
 
     @GetMapping("/category/{categoryId}")
     public ResponseEntity<?> getProductsByCategory(@PathVariable Integer categoryId) {
-        return ResponseEntity.ok(
-                List.of(Map.of("productId", 1, "categoryId", categoryId))
-        );
+        return ResponseEntity.ok(List.of(
+                Map.of("productId", 1, "categoryId", categoryId)
+        ));
     }
 
     @GetMapping("/{id}/stock")
