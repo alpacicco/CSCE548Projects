@@ -10,7 +10,7 @@ function updateApiUrl() {
 
 // Test API Connection
 // ✅ FIXED BASE URL (CRITICAL)
-let API_BASE_URL = 'http://localhost:8080';
+let API_BASE_URL = 'http://localhost:5000';
 
 // Test API Connection (FIXED)
 async function testConnection() {
