@@ -15,7 +15,7 @@
             <p class="subtitle">CSCE 548 - Project 4 | REST API Frontend</p>
             <div class="api-config">
                 <label for="apiUrl">API Base URL:</label>
-                <input type="text" id="apiUrl" value="http://localhost:8080" placeholder="http://localhost:8080">
+                <input type="text" id="apiBaseUrl" value="http://localhost:8080" placeholder="http://localhost:8080">
                 <button onclick="testConnection()" class="btn-primary">Test Connection</button>
                 <span id="connectionStatus"></span>
             </div>
@@ -280,7 +280,7 @@
         </footer>
     </div>
 
-    <script src="app.js"></script>
+    <script type="module" src="app.js"></script>
 </body>
 
 </html>
