@@ -1,21 +1,13 @@
 {
-    "name": "ecommerce-app",
+    "name": "csce548projects",
     "version": "1.0.0",
-    "description": "CSCE 548 Project",
-    "main": "server/app.js",
     "scripts": {
-        "dev": "vite",
-        "build": "vite build",
-        "preview": "vite preview",
-        "deploy": "gh-pages -d dist"
-    },
-    "dependencies": {
-        "cors": "^2.8.5",
-        "express": "^4.18.2",
-        "run": "^1.5.0"
+      "dev": "vite",
+      "build": "vite build",
+      "deploy": "gh-pages -d dist"
     },
     "devDependencies": {
-        "gh-pages": "^6.3.0",
-        "vite": "^8.0.3"
+      "vite": "^5.0.0",
+      "gh-pages": "^6.0.0"
     }
 }
