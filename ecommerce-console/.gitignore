@@ -1,4 +1,10 @@
+# Java build files
+target/
+*.class
+
+# Node stuff
 node_modules/
 .cache/
-dist/
-build/
+
+# OS junk
+.DS_Store
