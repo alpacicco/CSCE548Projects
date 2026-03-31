@@ -1,29 +1,10 @@
-# Maven
+# Java build files
 target/
-pom.xml.tag
-pom.xml.releaseBackup
-pom.xml.versionsBackup
-pom.xml.next
-release.properties
-dependency-reduced-pom.xml
+*.class
 
-# IntelliJ IDEA
-.idea/
-*.iml
-*.iws
-*.ipr
+# Node stuff
+node_modules/
+.cache/
 
-# Eclipse
-.project
-.classpath
-.settings/
-
-# VS Code
-.vscode/
-
-# Environment
-.env
-
-# OS
+# OS junk
 .DS_Store
-Thumbs.db
