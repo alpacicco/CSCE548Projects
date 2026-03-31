@@ -1,11 +1,15 @@
 import { defineConfig } from 'vite';
 
 export default defineConfig({
-  root: 'web-client',   // 🔥 THIS IS THE KEY
+  root: 'web-client',
   base: '/CSCE548Projects/',
 
   build: {
-    outDir: '../dist',  // output goes back to root dist
+    outDir: '../dist',
     emptyOutDir: true
+  },
+
+  server: {
+    port: 5173
   }
 });
