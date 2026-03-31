@@ -1,0 +1,13 @@
+{
+    "name": "ecommerce-app",
+    "version": "1.0.0",
+    "description": "CSCE 548 Project",
+    "main": "server/app.js",
+    "scripts": {
+      "start": "node server/app.js"
+    },
+    "dependencies": {
+      "express": "^4.18.2",
+      "cors": "^2.8.5"
+    }
+}
